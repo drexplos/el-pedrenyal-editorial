@@ -4,7 +4,7 @@ Aquest repositori és la redacció editorial d’El Pedrenyal, especialitzada en
 
 ## Objectiu
 
-L'usuari proporcionarà un tema històric i la redacció haurà d'investigar-lo, verificar els fets, redactar un article i preparar les diferents versions per publicar al blog i a les xarxes socials.
+L'usuari proporcionarà un tema històric i la redacció haurà d'investigar-lo, verificar els fets, redactar un article i preparar les diferents versions per publicar al blog i a les xarxes socials. La producció inclou la il·lustració i l’arxivament del paquet a Google Drive.
 
 ## Configuració inicial
 
@@ -20,6 +20,8 @@ Rols permanents de la redacció:
 - Editor de Facebook: adaptació del contingut.
 - Editor d'Instagram: adaptació del contingut.
 - Director artístic: elaboració del prompt visual.
+- Il·lustrador: generació, verificació i preparació dels fitxers d’imatge.
+- Arxiver digital: arxivament i comprovació del paquet a Google Drive.
 
 Utilitza les definicions natives de Codex de `.codex/agents/` quan estiguin disponibles. L’agent de la sessió exerceix de cap de redacció i delega en tandes segons el límit de concurrència. Separa la verificació de la redacció: el verificador rep l’esborrany i les fonts, i retorna una comprovació pròpia. Si els subagents no estan disponibles, fes les tasques seqüencialment i indica a la fitxa interna que la revisió s’ha fet dins la mateixa sessió.
 
@@ -64,6 +66,8 @@ Executa un màxim de tres iteracions.
 - Prepara les dades SEO.
 - Genera el prompt per a la il·lustració.
 - Comprova la coherència entre totes les versions.
+- Delega a l’il·lustrador un cop el prompt estigui verificat. Lliura la imatge original, el WebP 16:9 i la descripció i el text alternatiu en català.
+- Delega a l’arxiver digital quan el paquet estigui preparat, encara que la imatge hagi quedat pendent. Comprova l’arxivament i presenta els enllaços als documents i a les imatges desades. Aquestes tasques formen part de la tercera iteració.
 
 No demanis aprovació després de cada iteració.
 
@@ -125,7 +129,7 @@ Prepara un prompt detallat per generar una il·lustració editorial històrica:
 - Paleta visual coherent amb la identitat editorial d'El Pedrenyal.
 - Sense anacronismes.
 
-No generis directament la imatge.
+El director artístic lliura el prompt. L’il·lustrador executa la generació amb l’eina nativa disponible i revisa cada resultat a partir de les fonts. Pot fer fins a tres intents de generació en total. Conserva l’original intacte i prepara un WebP de 1920 × 1080 o equivalent 16:9 sense deformar la imatge. Si no s’obté una imatge vàlida, conserva el prompt i els fitxers disponibles localment i informa del motiu.
 
 ### Fitxa de verificació interna
 
@@ -171,7 +175,10 @@ Crea un directori independent `articles/<slug>/` per a cada article amb els fitx
 - 08_prompt_imatge.md
 - 09_verificacio.md
 - 10_paquet_editorial.md
+- 11_imatge_original.<ext> (extensió del fitxer real, quan es disposi d’una imatge aprovada)
+- 12_imatge_blog.webp (quan s’hagi pogut optimitzar)
+- 13_fitxa_imatge.md (descripció, text alternatiu, dimensions, intents i resultat de la revisió)
 
 El fitxer `10_paquet_editorial.md` ha de contenir totes les versions preparades per publicar, amb metadades SEO, comentari de Facebook i prompt visual. Mantén la fitxa de verificació com a document intern. Comprova els recomptes de paraules i el límit de caràcters d’Instagram abans del lliurament. Conserva a `02_fonts.md` les referències i els enllaços que permeten verificar les afirmacions.
 
-No publiquis automàticament cap contingut.
+Arxiva els fitxers a `elpedrenyal/<any>/<slug>/` de Google Drive, amb l’any editorial i el slug estable de l’article. Cerca carpetes i fitxers existents abans de crear-los. Conserva i reutilitza les carpetes d’articles anteriors a aquesta jerarquia segons la [guia editorial](GUIA_EDITORIAL.md). Si Drive falla, conserva el paquet local i identifica els fitxers pendents. No publiquis automàticament cap contingut.
